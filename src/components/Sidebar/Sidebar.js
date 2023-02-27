@@ -14,9 +14,11 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AddIcon from "@mui/icons-material/Add";
 import SidebarOption from "../SidebarOption/SidebarOption";
 import { db } from "../../firebase";
+import { useStateValue } from "../../ContextApi/StateProvider";
 
 function Sidebar() {
   const [channels, setChannels] = useState([]);
+  const [{ user }, dispatch] = useStateValue();
 
   useEffect(() => {
     db.collection("rooms").onSnapshot((snapshot) =>
@@ -36,7 +38,7 @@ function Sidebar() {
           <h2>Clever Programmer</h2>
           <h3>
             <FiberManualRecordIcon />
-            Tunay Uzbay Yelce
+            {user?.displayName}
           </h3>
         </div>
         <CreateIcon />
